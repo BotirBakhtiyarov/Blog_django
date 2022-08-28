@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<form  method="post">
+  {% csrf_token %}
+<div class="col-md-3">
+  <div class="col-form-label form-control">
+    {{form.title}}
+
+  </div>
+</div>
+<div class="col-md-6">
+    <div class="col-form-label form-control">
+      {{form.body}}
+
+    </div>
+</div>
+<input type="submit" name="" value="submit">
+
+</form>
+{% endblock content %}

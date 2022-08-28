@@ -1,0 +1,27 @@
+{% extends 'registration/login_base.html' %}
+{% block content %}
+
+  {% csrf_token %}
+  <div class="modal-header p-5 pb-4 border-bottom-0">
+    <!-- <h5 class="modal-title">Modal title</h5> -->
+    <h2 class="fw-bold mb-0">Log In</h2>
+    <a href="{% url 'index' %}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
+
+  </div>
+
+  <div class="modal-body p-5 pt-0">
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+      <div class="form-floating mb-3">
+        <input type="username" class="form-control rounded-3" name='username' id="username" placeholder="username">
+        <label for="username">User Name</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="password" class="form-control rounded-3" name='password' id="password" placeholder="Password">
+        <label for="password">Password</label>
+      </div>
+      <input class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" name="" value="Log In">
+    </form>
+  </div>
+
+{% endblock content %}

@@ -1,0 +1,48 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="p-5 mb-4 bg-light rounded-3">
+  {% if user.is_authenticated %}
+  <div class="d-flex justify-content-end">
+    <a href="{%url 'update' post.pk%}"><button class="btn btn-warning" type="button">Edit</button></a>
+    <a href="{% url 'delete' post.pk %}"><button class="btn btn-danger" type="button">Delete</button></a>
+  </div>
+{% endif %}
+    <div class="container-fluid py-5">
+
+      <h1 class="display-5 fw-bold">{{post.title}}</h1>
+      <div class="mb-1">
+        {{post.author}}
+        <div class="mb-1 text-muted">{{post.publish_date}}</div>
+      </div>
+      <!-- <img src="{% static 'image/rasm.png' %}" alt=""> -->
+      <p class="col-md-8 fs-4">{{post.body}}</p>
+
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+      <div class="col p-4 d-flex flex-column position-static d-flex">
+          <div class="row justify-content-between">
+            <div class="col-4">
+              <h3 class="mb-0">Comments</h3>
+            </div>
+            <div class="col-2">
+                <a href="{%url 'comment' post.pk%}"><button class="btn btn-primary btn-md" type="button">Add Comment</button></a>
+            </div>
+          </div>
+
+          {% if  not post.comments.all %}
+            <p class="card-text mb-auto">There is No any Comment</p>
+            {% else %}
+          {% for comment in post.comments.all %}
+        <div class="mb-1">
+          <div class="mb-1 text-muted">{{comment.create_date}}</div>
+        </div>
+        <p class="card-text mb-auto">{{comment.text}}</p>
+          {% endfor %}
+          {% endif %}
+      </div>
+
+{% endblock %}
