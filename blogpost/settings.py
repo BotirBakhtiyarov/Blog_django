@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'MyApp',
+    'django_summernote',
 ]
 
 MIDDLEWARE = [
@@ -120,6 +121,9 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR/'MyApp/static'
 ]
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR/'media'
 
 LOGIN_URL='login'
 # Default primary key field type

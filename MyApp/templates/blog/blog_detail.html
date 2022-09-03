@@ -17,7 +17,7 @@
         <div class="mb-1 text-muted">{{post.publish_date}}</div>
       </div>
       <!-- <img src="{% static 'image/rasm.png' %}" alt=""> -->
-      <p class="col-md-8 fs-4">{{post.body}}</p>
+      <p class="col-md-8 fs-4">{{post.body|safe}}</p>
 
     </div>
   </div>

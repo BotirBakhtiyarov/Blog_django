@@ -2,7 +2,12 @@
 {% block content %}
 <form method="post">
 {% csrf_token %}
-{{form.as_p}}
+{{form.title.label}}
+{{form.title}}
+{{form.author.label}}
+{{form.author}}
+{{form.body.label}}
+{{form.body | safe}}
 <input type="submit" name="" value="submit">
 </form>
 {% endblock content %}

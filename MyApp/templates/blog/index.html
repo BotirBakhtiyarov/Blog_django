@@ -10,7 +10,7 @@
               <h3 class="mb-0">{{p.title}}</h3>
               <div class="mb-1">{{p.author}}</div>
               <div class="mb-1 text-muted">{{p.publish_date}}</div>
-              <p class="card-text mb-auto">{{p.body |slice:'70'}}</p>
+              <p class="card-text mb-auto">{{p.body |safe}}</p>
               <a href="{% url 'post_detail' p.pk %}" class="stretched-link">Continue reading</a>
             </div>
           </div>

@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (DetailView, ListView, UpdateView,
                                     DeleteView, CreateView, TemplateView)
 
+from .forms import BlogCreateViewForm, BlogUpdateViewForm
 # Create your views here.
 class IndexListView(ListView):
     template_name = 'blog/index.html'
@@ -17,16 +18,44 @@ class IndexListView(ListView):
 class BlogDetailView(DetailView):
     model = Post
     template_name = 'blog/blog_detail.html'
+    
+@login_required
+def BlogUpdateView(request, pk):
+    post = Post.objects.get(id=pk)
+    form = BlogUpdateViewForm(instance=post)
+    if request.method == 'POST':
+        form = BlogUpdateViewForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+        else:
+            print('Xato')
+    context = {'form':form}
+    return render(request, 'blog/update_post.html', context)
 
-class BlogUpdateView(LoginRequiredMixin, UpdateView):
-    model = Post
-    fields = ['title', 'body']
-    template_name = 'blog/update_post.html'
 
-class BlogCreateView(LoginRequiredMixin, CreateView):
-    model = Post
-    fields = ['author','title','body']
-    template_name = 'blog/create_blog.html'
+# class BlogUpdateView(LoginRequiredMixin, UpdateView):
+#     model = Post
+#     fields = ['title', 'body']
+#     template_name = 'blog/update_post.html'
+@login_required
+def BlogCreateView(request):
+    form = BlogCreateViewForm()
+    if request.method == 'POST':
+        form = BlogCreateViewForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+        else:
+            print('xato')
+    context = {'form':form}
+    return render(request, 'blog/create_blog.html', context)
+
+# class BlogCreateView(LoginRequiredMixin, CreateView):
+#     model = Post
+#     fields = ['author','title','body']
+#     body = forms.CharField(widget=SummernoteWidget)
+#     template_name = 'blog/create_blog.html'
 
 class BlogDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
