@@ -1,0 +1,3 @@
+# Blog_django
+
+this is blog web site...
