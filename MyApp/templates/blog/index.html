@@ -10,8 +10,10 @@
               <h3 class="mb-0">{{post.title}}</h3>
               <div class="mb-1">{{post.author}}</div>
               <div class="mb-1 text-muted">{{post.publish_date}}</div>
-              <p class="card-text mb-auto">{{post.body|slice:65}}</p>
-              <a href="{% url 'post_detail' post.pk %}" class="stretched-link">Continue reading</a>
+              <p class="card-text mb-auto">{{post.body|safe|truncatechars:25}}</p>
+              <div>
+                <a  class="stretched-link" href="{% url 'post_detail' post.pk %}"">Continue reading</a>
+              </div>
             </div>
           </div>
         </div>
